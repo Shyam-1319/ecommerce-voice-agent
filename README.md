@@ -59,8 +59,45 @@ Keep your actual key private.
 
 Enter a message at the `You:` prompt. Type `exit` to finish.
 
+## Run the backend API
+
+Start the development server from the project folder.
+
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn api:app --reload
+```
+
+Open http://127.0.0.1:8000/docs to test the endpoints.
+
+### Available endpoints
+
+- `GET /health` returns `{"status": "ok"}`.
+- `POST /chat` accepts a message and returns a generated answer.
+
+Example request body for `/chat`:
+
+```json
+{
+  "message": "Explain what an API does in two simple sentences."
+}
+```
+
+The message must contain between 1 and 2,000 characters after
+surrounding whitespace is removed.
+
+### Response status codes
+
+- `200` indicates a successful response.
+- `422` indicates invalid input, such as a missing or blank message.
+- `502` indicates a provider error or an empty model answer.
+
+Each API request processes one message independently.
+Conversation history is currently supported by the terminal chatbot.
+
+Press Ctrl+C in the server terminal to stop the server.
+
 ## Limitations
 
 - Conversation history grows with each exchange, increasing token usage.
-- API and network errors currently stop the program.
+- API and network errors currently stop the terminal chatbot.
 - Customer support tools and voice features are planned.

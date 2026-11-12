@@ -1,23 +1,66 @@
 # E-commerce Voice Support Agent
 
-A portfolio project exploring voice-based customer support
+A portfolio project building toward voice-based customer support
 for a fictional online store.
+
+## Current implementation
+
+The current prototype is a terminal chatbot using Groq's API.
+
+- Accepts questions entered in the terminal.
+- Generates responses using the openai/gpt-oss-20b model.
+- Sends conversation history with each request.
+- Remembers earlier messages during the running session.
+- Skips empty input and exits when the user types `exit`.
+- Loads the API key from a local `.env` file.
+
+Conversation history is held in memory and resets when the program restarts.
 
 ## Planned capabilities
 
-- Check order status.
-- Answer delivery and return policy questions.
-- Create return requests after customer confirmation.
-- Escalate conversations to a human support representative.
+- Browser-based voice conversations.
+- Order status lookup.
+- Answers grounded in delivery and return policies.
+- Return requests with customer confirmation.
+- Human support escalation.
 
-## Current progress
+## Fresh setup on Windows
 
-- Python virtual environment configured.
-- Git repository initialized.
-- Project ignore rules added.
+Prerequisites are Python 3.13, Git, and a Groq API key.
 
-## Development setup
+Clone the repository and enter its folder.
 
-- Python 3.13
-- Cursor
-- Git
+```powershell
+git clone https://github.com/Shyam-1319/ecommerce-voice-agent.git
+cd ecommerce-voice-agent
+```
+
+Create a virtual environment and install dependencies.
+
+```powershell
+py -3.13 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
+
+Create a `.env` file from the template.
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Open `.env` and enter your key after `GROQ_API_KEY=`.
+Keep your actual key private.
+
+## Run the chatbot
+
+```powershell
+.\.venv\Scripts\python.exe first_request.py
+```
+
+Enter a message at the `You:` prompt. Type `exit` to finish.
+
+## Limitations
+
+- Conversation history grows with each exchange, increasing token usage.
+- API and network errors currently stop the program.
+- Customer support tools and voice features are planned.
